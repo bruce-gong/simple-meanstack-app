@@ -130,6 +130,8 @@ router.post('/register', function (req, res, next) {
   var user = new User();
 
   user.username = req.body.username;
+  user.phone = req.body.phone;
+  console.log(user.phone);
 
   user.setPassword(req.body.password);
 
@@ -155,6 +157,15 @@ router.post('/login', function (req, res, next) {
       return res.status(401).json(info);
     }
   })(req, res, next);
+});
+
+// Update user profile
+router.put('/profile/:user_id', auth, function(req, res, next) {
+  User.findById(req.params.user_id, function (err, user) {
+    if(err){ return next(err); }
+    console.log(req.body);
+    user.updateProfile(user);
+  })
 });
 
 module.exports = router;
