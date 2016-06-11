@@ -1,5 +1,6 @@
-app.factory('auth', ['$http', '$window',  function ($http, $window) {
-  var auth = {};
+app.factory('auth', ['$http', '$window', '$rootScope',  function ($http, $window, $rootScope) {
+  var auth = {},
+      currentUser = {};
 
   auth.saveToken = function (token) {
     $window.localStorage['flapper-news-token'] = token;
@@ -26,6 +27,7 @@ app.factory('auth', ['$http', '$window',  function ($http, $window) {
       var token = auth.getToken();
       var payload = JSON.parse($window.atob(token.split('.')[1]));
       console.info(payload);
+      currentUser = payload;
       return payload;
     }
   };
@@ -39,6 +41,7 @@ app.factory('auth', ['$http', '$window',  function ($http, $window) {
   auth.logIn = function (user) {
     return $http.post('/login', user).success(function (data) {
       auth.saveToken(data.token);
+      $rootScope.$broadcast("auth:login");
     });
   };
 
