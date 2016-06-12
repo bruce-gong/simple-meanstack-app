@@ -1,4 +1,8 @@
-# simple-meanstack-app
-Simple MEAN Stack app
+# Simple MEAN Stack web app
 
-Use npm start to start the project
+## Usage
+Use `npm start` to start the app.
+
+## Features
+* Register and Login system with Passport authentication.
+* Post and Comment with upvote and downvote.
