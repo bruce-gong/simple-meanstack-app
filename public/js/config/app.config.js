@@ -38,17 +38,24 @@ app.config([
         url: '/register',
         templateUrl: 'js/auth/register.html',
         controller: 'AuthCtrl',
-        onEnter: ['$state', 'auth', function($state, auth){
+        onEnter: ['$state', 'auth', '$timeout', function($state, auth, $timeout){
           if(auth.isLoggedIn()){
-            $state.go('home');
+            // ui-router bug: https://github.com/angular-ui/ui-router/issues/326
+            $timeout(function () {
+              $state.go('home');
+            }, 0)
           }
         }]
       })
       .state('profile', {
         url: '/profile',
         templateUrl: 'js/profile/profile.html',
-        controller: 'ProfileCtrl'
-
+        controller: 'ProfileCtrl',
+        onEnter: ['$state', 'auth', function($state, auth){
+          if(!auth.isLoggedIn()){
+            $state.go('home');
+          }
+        }]
       });
 
       $urlRouterProvider.otherwise('home');
