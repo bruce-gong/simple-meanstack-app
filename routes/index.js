@@ -143,6 +143,7 @@ router.post('/register', function (req, res, next) {
   var user = new User();
 
   user.username = req.body.username;
+  user.email = req.body.email;
   user.phone = req.body.phone;
 
   user.setPassword(req.body.password);
@@ -173,6 +174,9 @@ router.post('/login', function (req, res, next) {
 
 // Update user profile
 router.put('/profile/:user', auth, function(req, res, next) {
+  if (req.body.phone < 1000000000 || req.body.phone > 9999999999) {
+    return res.status(400).json({message: 'Phone number is not 10 digits!'});
+  }
   req.user.updateProfile(req.body, function (err, user) {
     if (err) { return next(err); }
 

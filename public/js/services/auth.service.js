@@ -1,4 +1,5 @@
-app.factory('auth', ['$http', '$window', '$rootScope',  function ($http, $window, $rootScope) {
+app.factory('auth', ['$http', '$window', '$rootScope', '$state',
+function ($http, $window, $rootScope, $state) {
   var auth = {},
       currentUser = {};
 
@@ -34,6 +35,7 @@ app.factory('auth', ['$http', '$window', '$rootScope',  function ($http, $window
   auth.register = function (user) {
     return $http.post('/register', user).success(function (data) {
       auth.saveToken(data.token);
+      $rootScope.$broadcast("auth:register");
     });
   };
 
@@ -46,6 +48,7 @@ app.factory('auth', ['$http', '$window', '$rootScope',  function ($http, $window
 
   auth.logOut = function () {
     $window.localStorage.removeItem('micro-blog-token');
+    $state.go('home');
   };
 
   auth.updateUserProfile = function (user) {

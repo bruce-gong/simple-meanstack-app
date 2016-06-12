@@ -15,8 +15,12 @@ app.controller('ProfileCtrl', [
     }
 
     $scope.submitProfile = function () {
-      auth.updateUserProfile($scope.currentUser);
-      $scope.isEditing = false;
+      auth.updateUserProfile($scope.currentUser).success(function () {
+        $scope.isEditing = false;
+      }).error(function (error) {
+        $scope.error = error;
+      });
     }
+
   }
 ]);

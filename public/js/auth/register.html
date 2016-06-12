@@ -13,19 +13,27 @@
     <input type="text"
       class="form-control"
       placeholder="Username"
-      ng-model="user.username"></input>
+      ng-model="user.username" />
   </div>
   <div class="form-group">
     <input type="password"
       class="form-control"
       placeholder="Password"
-      ng-model="user.password"></input>
+      ng-model="user.password" />
+  </div>
+  <div class="form-group">
+    <input type="email"
+      class="form-control"
+      placeholder="Email"
+      ng-model="user.email" />
   </div>
   <div class="form-group">
     <input type="number"
       class="form-control"
-      placeholder="Cell"
-      ng-model="user.phone"></input>
+      min="1000000000"
+      max="9999999999"
+      placeholder="Phone Number"
+      ng-model="user.phone" />
   </div>
   <button type="submit" class="btn btn-primary">Register</button>
 </form>
