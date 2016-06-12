@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Flapper News</title>
+  <title>Micro Blog</title>
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
@@ -18,9 +18,12 @@
   <script src="/js/services/auth.service.js"></script>
   <script src="/js/services/posts.service.js"></script>
 
-  <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+  <style>
+   .glyphicon-thumbs-up { cursor:pointer }
+   .glyphicon-thumbs-down { cursor:pointer }
+  </style>
 </head>
-<body ng-app="flapperNews">
+<body ng-app="microBlog">
   <nav-bar></nav-bar>
 
   <div class="row">

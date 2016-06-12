@@ -3,11 +3,11 @@ app.factory('auth', ['$http', '$window', '$rootScope',  function ($http, $window
       currentUser = {};
 
   auth.saveToken = function (token) {
-    $window.localStorage['flapper-news-token'] = token;
+    $window.localStorage['micro-blog-token'] = token;
   };
 
   auth.getToken = function () {
-    return $window.localStorage['flapper-news-token'];
+    return $window.localStorage['micro-blog-token'];
   };
 
   auth.isLoggedIn = function () {
@@ -26,7 +26,6 @@ app.factory('auth', ['$http', '$window', '$rootScope',  function ($http, $window
     if (auth.isLoggedIn()) {
       var token = auth.getToken();
       var payload = JSON.parse($window.atob(token.split('.')[1]));
-      console.info(payload);
       currentUser = payload;
       return payload;
     }
@@ -46,7 +45,7 @@ app.factory('auth', ['$http', '$window', '$rootScope',  function ($http, $window
   };
 
   auth.logOut = function () {
-    $window.localStorage.removeItem('flapper-news-token');
+    $window.localStorage.removeItem('micro-blog-token');
   };
 
   auth.updateUserProfile = function (user) {

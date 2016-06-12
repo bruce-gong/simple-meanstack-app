@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var PostSchema = new mongoose.Schema({
   author: String,
   title: String,
-  link: String,
+  content: String,
   upvotes: {type: Number, default: 0},
   downvotes: {type: Number, default: 0},
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]

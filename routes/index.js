@@ -36,6 +36,19 @@ router.post('/posts', auth, function(req, res, next) {
   });
 });
 
+/* preload user by ID. */
+router.param('user', function(req, res, next, id) {
+  var query = User.findById(id);
+
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('can\'t find user')); }
+
+    req.user = user;
+    return next();
+  });
+});
+
 /* preload post page by ID. */
 router.param('post', function(req, res, next, id) {
   var query = Post.findById(id);
@@ -131,7 +144,6 @@ router.post('/register', function (req, res, next) {
 
   user.username = req.body.username;
   user.phone = req.body.phone;
-  console.log(user.phone);
 
   user.setPassword(req.body.password);
 
@@ -160,12 +172,12 @@ router.post('/login', function (req, res, next) {
 });
 
 // Update user profile
-router.put('/profile/:user_id', auth, function(req, res, next) {
-  User.findById(req.params.user_id, function (err, user) {
-    if(err){ return next(err); }
-    console.log(req.body);
-    user.updateProfile(user);
-  })
+router.put('/profile/:user', auth, function(req, res, next) {
+  req.user.updateProfile(req.body, function (err, user) {
+    if (err) { return next(err); }
+
+    res.json({token: user.generateJWT()});
+  });
 });
 
 module.exports = router;

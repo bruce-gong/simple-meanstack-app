@@ -14,6 +14,7 @@ CommentSchema.methods.upvote = function(cb) {
 };
 
 CommentSchema.methods.downvote = function(cb) {
+  console.log(cb)
   this.downvotes += 1;
   this.save(cb);
 };

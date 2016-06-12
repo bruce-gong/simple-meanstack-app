@@ -38,10 +38,10 @@ UserSchema.methods.generateJWT = function () {
   }, 'SECRET');
 };
 
-UserSchema.methods.updateProfile = function(user) {
+UserSchema.methods.updateProfile = function(user, cb) {
   this.phone = user.phone;
   this.email = user.email;
-  this.save();
+  this.save(cb);
   console.log(this);
 };
 

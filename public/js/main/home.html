@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Flapper News</h1>
+  <h1>Micro Blog</h1>
 </div>
 
 <div ng-repeat="post in posts | orderBy:'-downvotes' | orderBy:'-upvotes'">
@@ -42,8 +42,8 @@ style="margin-top:30px;">
 <div class="form-group">
   <input type="text"
   class="form-control"
-  placeholder="Link"
-  ng-model="link"></input>
+  placeholder="Content"
+  ng-model="content"></input>
 </div>
 <button type="submit" class="btn btn-primary">Post</button>
 </form>
