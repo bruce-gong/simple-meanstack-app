@@ -3,7 +3,8 @@
 ## Usage
 1. Clone the repo.
 2. Install all the dependancies using `npm install`
-3. Use `npm start` to start the app.
+3. Connect mongoDB
+4. Use `npm start` to start the app.
 
 ## Features
 * Register and Login system with Passport authentication.
